@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "glam-pretask",
+    "slug": "glam-pretask",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "glam-pretask"
+}
