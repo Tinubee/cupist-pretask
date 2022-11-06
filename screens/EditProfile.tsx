@@ -1,12 +1,13 @@
-import React from "react";
-import { Text, View } from "react-native";
+import React, { useEffect } from "react";
+import { Alert } from "react-native";
 import { useQuery } from "react-query";
+import { useRecoilState } from "recoil";
 import styled from "styled-components/native";
 import { myProfile } from "../api";
+import { setMyprofile } from "../atoms";
 import Loader from "../components/Loader";
 import ProfilePhoto from "../components/ProfilePhoto";
-import { Color } from "../theme";
-import { BodyTypes, Educations } from "../utils";
+import { BodyTypes, Educations, LBodyTypes } from "../utils";
 
 const Container = styled.ScrollView``;
 
@@ -64,6 +65,23 @@ const EditProfile = () => {
     ["myProfile"],
     myProfile
   );
+  const [myRProfileData, setMyRProfileData] = useRecoilState(setMyprofile);
+
+  const changeHeight = () => {
+    Alert.alert("키");
+  };
+
+  const changeBodytype = () => {
+    Alert.alert("체형");
+  };
+
+  const changeEducation = () => {
+    Alert.alert("학력");
+  };
+
+  useEffect(() => {
+    setMyRProfileData(myProfileData);
+  }, [myProfileLoading]);
 
   return myProfileLoading ? (
     <Loader />
@@ -104,13 +122,13 @@ const EditProfile = () => {
         />
         <Info>
           <Label>키</Label>
-          <DataChangeText>
+          <DataChangeText onPress={changeHeight}>
             <DataText>{myProfileData.data.height}</DataText>
           </DataChangeText>
         </Info>
         <Info>
           <Label>체형</Label>
-          <DataChangeText>
+          <DataChangeText onPress={changeBodytype}>
             <DataText>{BodyTypes(myProfileData.data.body_type)}</DataText>
           </DataChangeText>
         </Info>
@@ -129,7 +147,7 @@ const EditProfile = () => {
         </Info>
         <Info>
           <Label>학력</Label>
-          <DataChangeText>
+          <DataChangeText onPress={changeEducation}>
             <DataText>{Educations(myProfileData.data.education)}</DataText>
           </DataChangeText>
         </Info>

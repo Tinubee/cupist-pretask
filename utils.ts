@@ -16,3 +16,14 @@ export const Educations = (edu: string) => {
   if (edu === "education_05") return "기타";
   else return "선택해주세요";
 };
+
+export const LBodyTypes = ["마른", "보통", "근육질", "통통"];
+
+export const LEducations = [
+  "고등학교",
+  "전문대",
+  "대학교",
+  "석사",
+  "박사",
+  "기타",
+];

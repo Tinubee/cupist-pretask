@@ -5,10 +5,17 @@ import { useRecoilState } from "recoil";
 import styled from "styled-components/native";
 import { addRecommend, todayRecommend } from "../api";
 import { setAddProfile, setTodayProfile } from "../atoms";
+import CostomRecommend from "../components/CostomRecommend";
 import Loader from "../components/Loader";
 import PersonList from "../components/PersonList";
 
 const Container = styled.View``;
+
+const CustomText = styled.Text`
+  margin: 16px;
+  font-size: 20px;
+  font-weight: 600;
+`;
 
 const Home = () => {
   const queryClient = useQueryClient();
@@ -50,7 +57,7 @@ const Home = () => {
       onRefresh={onRefresh}
       refreshing={refreshing}
       renderItem={({ item }) => (
-        <View>
+        <Container>
           <PersonList key={item.id} data={item} type="today" />
           {more ? (
             <FlatList
@@ -60,7 +67,9 @@ const Home = () => {
               data={addProfileData}
             />
           ) : null}
-        </View>
+          <CustomText>맞춤 추천</CustomText>
+          <CostomRecommend />
+        </Container>
       )}
       data={todayProfileData}
     />
