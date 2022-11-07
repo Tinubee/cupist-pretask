@@ -4,13 +4,18 @@ export interface IProfileData {
   meta: IProfileMeta;
 }
 export interface IProfile {
+  birthday: string;
+  body_type: "마른" | "보통" | "근육" | "통통";
+  company: string;
+  education?: "고등학교" | "전문대" | "대학교" | "석사" | "박사" | "기타";
+  gender: "남성" | "여성";
+  height: string;
   id: number;
-  name: string;
-  age: number;
-  job: string;
-  height: number;
-  distance: number;
   introduction: string;
+  job: string;
+  location: string;
+  name: string;
+  school?: string;
   pictures: string[];
 }
 
@@ -23,17 +28,17 @@ export interface IProfileMeta {
 
 export interface IGenders {
   key: string;
-  name: string;
+  name: "남성" | "여성";
 }
 
 export interface IBodyTypes {
   key: string;
-  name: string;
+  name: "마른" | "보통" | "근육" | "통통";
 }
 
 export interface IEducations {
   key: string;
-  name: string;
+  name: "고등학교" | "전문대" | "대학교" | "석사" | "박사" | "기타";
 }
 
 export interface IHeight {
