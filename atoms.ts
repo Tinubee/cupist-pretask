@@ -10,7 +10,7 @@ export interface IProfile {
   education?: "고등학교" | "전문대" | "대학교" | "석사" | "박사" | "기타";
   gender: "남성" | "여성";
   height: string;
-  id: number;
+  id: string;
   introduction: string;
   job: string;
   location: string;

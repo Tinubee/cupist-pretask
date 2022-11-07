@@ -5,8 +5,10 @@ import Live from "../screens/Live";
 import Around from "../screens/Around";
 import styled from "styled-components/native";
 import EditProfile from "../screens/EditProfile";
+import { createStackNavigator } from "@react-navigation/stack";
 
 const Tab = createMaterialTopTabNavigator();
+const Stack = createStackNavigator();
 
 const Logo = styled.Image`
   width: 100%;
@@ -19,7 +21,7 @@ const TopTabs = () => {
   return (
     <Tab.Navigator>
       <Tab.Screen
-        name="Home"
+        name="Glam"
         component={Home}
         options={{
           tabBarIcon: () => (

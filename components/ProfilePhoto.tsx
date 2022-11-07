@@ -22,6 +22,7 @@ const ProfilePhoto = ({ photo }: any) => {
           <Image source={{ uri: makeImgPath(photo[index]) }} />
         )}
         numColumns={numColumns}
+        keyExtractor={(item, index) => index.toString()}
       />
     </ListContainer>
   );

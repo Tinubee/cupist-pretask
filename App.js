@@ -8,6 +8,7 @@ import Tabs from "./navigation/Tabs";
 import { SafeAreaView } from "react-native";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { RecoilRoot } from "recoil";
+import TopTabs from "./navigation/TopTabs";
 
 const loadFonts = (fonts) => fonts.map((font) => Font.loadAsync(font));
 const queryClient = new QueryClient();

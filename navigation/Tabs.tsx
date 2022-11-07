@@ -6,6 +6,7 @@ import Chats from "../screens/Chats";
 import TabIcon from "../components/TabIcon";
 import TopTabs from "./TopTabs";
 import Profile from "../screens/Profile";
+import Home from "../screens/Home";
 
 const Tab = createBottomTabNavigator();
 

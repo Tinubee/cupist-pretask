@@ -9,8 +9,6 @@ import CostomRecommend from "../components/CostomRecommend";
 import Loader from "../components/Loader";
 import PersonList from "../components/PersonList";
 
-const Container = styled.View``;
-
 const CustomText = styled.Text`
   margin: 16px;
   font-size: 20px;
@@ -25,17 +23,22 @@ const Home = () => {
     useRecoilState(setTodayProfile);
   const [addProfileData, setAddProfileData] = useRecoilState(setAddProfile);
 
-  const { isLoading: todayRecommendLoading, data: todayRecommendData } =
-    useQuery(["todayRecommend"], todayRecommend);
+  const {
+    isLoading: todayRecommendLoading,
+    data: todayRecommendData,
+    refetch: todayRecommendDataRefetch,
+  } = useQuery(["todayRecommend"], todayRecommend);
 
-  const { isLoading: addRecommendLoading, data: addRecommendData } = useQuery(
-    ["addRecommend"],
-    addRecommend
-  );
+  const {
+    isLoading: addRecommendLoading,
+    data: addRecommendData,
+    refetch: addRecommendDataRefetch,
+  } = useQuery(["addRecommend"], addRecommend);
   const loading = todayRecommendLoading || addRecommendLoading;
   const onRefresh = async () => {
     setRefreshing(true);
-    await queryClient.refetchQueries(["todayRecommend"]);
+    await todayRecommendDataRefetch();
+    await addRecommendDataRefetch();
     setRefreshing(false);
   };
 
@@ -46,7 +49,7 @@ const Home = () => {
   useEffect(() => {
     setTodayProfileData(todayRecommendData?.data);
     setAddProfileData(addRecommendData?.data);
-  }, [loading]);
+  }, [loading, refreshing]);
 
   return loading ? (
     <Loader />
@@ -57,7 +60,7 @@ const Home = () => {
       onRefresh={onRefresh}
       refreshing={refreshing}
       renderItem={({ item }) => (
-        <Container>
+        <>
           <PersonList key={item.id} data={item} type="today" />
           {more ? (
             <FlatList
@@ -65,13 +68,15 @@ const Home = () => {
                 <PersonList key={item.id} data={item} type="add" />
               )}
               data={addProfileData}
+              keyExtractor={(item) => item.id}
             />
           ) : null}
           <CustomText>맞춤 추천</CustomText>
           <CostomRecommend />
-        </Container>
+        </>
       )}
       data={todayProfileData}
+      keyExtractor={(item) => item.id}
     />
   );
 };

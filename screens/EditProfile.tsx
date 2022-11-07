@@ -8,6 +8,8 @@ import {
   ScrollView,
   View,
   Dimensions,
+  FlatList,
+  LogBox,
 } from "react-native";
 import { useQuery } from "react-query";
 import { useRecoilState } from "recoil";
@@ -18,8 +20,6 @@ import Loader from "../components/Loader";
 import ProfilePhoto from "../components/ProfilePhoto";
 import { BodyTypes, Educations, LBodyTypes, LEducations } from "../utils";
 import Modal from "react-native-modal";
-
-const Container = styled.ScrollView``;
 
 const ProfileData = styled.View`
   margin: 0px 16px;
@@ -89,7 +89,7 @@ const EditProfile = () => {
     body_type: "마른",
     education: "대학교",
     gender: "남성",
-    id: 0,
+    id: "0",
     job: "",
     location: "",
     name: "",
@@ -210,10 +210,14 @@ const EditProfile = () => {
     setMyRProfileData(myProfileData);
   }, [myProfileLoading]);
 
+  useEffect(() => {
+    LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
+  }, []);
+
   return myProfileLoading ? (
     <Loader />
   ) : (
-    <Container>
+    <ScrollView>
       <ProfilePhoto photo={myProfileData.data.pictures} />
       <TextInfo>
         <TextOne>다양한 매력을 보여줄 수 있는 사진을 올려주세요</TextOne>
@@ -332,7 +336,7 @@ const EditProfile = () => {
           </View>
         </Modal>
       )}
-    </Container>
+    </ScrollView>
   );
 };
 
