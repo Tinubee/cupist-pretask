@@ -1,7 +1,7 @@
 ## 큐피스트 사전과제
+![Home](https://user-images.githubusercontent.com/53461370/200311488-97facb7e-7ae4-4536-a880-7a72b4952baf.gif)
+![EditProfile](https://user-images.githubusercontent.com/53461370/200311504-b039872e-59e2-4d65-95d9-117ed18be43d.gif)
 
-![Home](https://user-images.githubusercontent.com/53461370/200212444-9562ce6f-a69c-4ea8-861a-ce6f722126c2.gif)
-![EditProfile](https://user-images.githubusercontent.com/53461370/200212448-51ced80e-4a7c-4260-9734-83650dbd8eae.gif)
 
 ## 구현 기술
 
