@@ -53,26 +53,44 @@ const Home = () => {
 
   return loading ? (
     <Loader />
+  ) : todayProfileData?.length === 0 ? (
+    <FlatList
+      renderItem={({ item, index }) => (
+        <>
+          <PersonList key={item.id} data={item} type="add" />
+          {index + 1 === addProfileData.length ? (
+            <>
+              <CustomText>맞춤 추천</CustomText>
+              <CostomRecommend />
+            </>
+          ) : null}
+        </>
+      )}
+      data={addProfileData}
+      keyExtractor={(item) => item.id}
+    />
   ) : (
     <FlatList
       onEndReachedThreshold={0.02}
       onEndReached={loadMore}
       onRefresh={onRefresh}
       refreshing={refreshing}
-      renderItem={({ item }) => (
+      renderItem={({ item, index }) => (
         <>
           <PersonList key={item.id} data={item} type="today" />
-          {more ? (
-            <FlatList
-              renderItem={({ item }) => (
-                <PersonList key={item.id} data={item} type="add" />
-              )}
-              data={addProfileData}
-              keyExtractor={(item) => item.id}
-            />
+          {more && index + 1 === todayProfileData?.length ? (
+            <>
+              <CustomText>맞춤 추천</CustomText>
+              <CostomRecommend />
+              <FlatList
+                renderItem={({ item }) => (
+                  <PersonList key={item.id} data={item} type="add" />
+                )}
+                data={addProfileData}
+                keyExtractor={(item) => item.id}
+              />
+            </>
           ) : null}
-          <CustomText>맞춤 추천</CustomText>
-          <CostomRecommend />
         </>
       )}
       data={todayProfileData}

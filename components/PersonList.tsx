@@ -84,14 +84,15 @@ const PersonList: React.FC<IListProps> = ({ data, type }) => {
   const DeleteProfile = () => {
     if (type === "today") {
       setTodayProfileData((arr) => {
-        return arr.filter((item) => item.name !== data.name);
+        return arr.filter((item) => item.id !== data.id);
       });
-    } else {
+    } else if (type === "add") {
       setAddProfileData((arr) => {
-        return arr.filter((item) => item.name !== data.name);
+        return arr.filter((item) => item.id !== data.id);
       });
     }
   };
+
   return (
     <ListContainer>
       <ProfileCard image={data.pictures[0]} />
